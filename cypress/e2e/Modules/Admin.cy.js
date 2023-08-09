@@ -5,6 +5,7 @@ describe('Admin',()=>{
     beforeEach('login',()=>{
 
         cy.login('Admin','admin123')
+         
     })
 
 
@@ -14,7 +15,6 @@ describe('Admin',()=>{
 
         //click on admin 
         cy.get(':nth-child(1) > .oxd-main-menu-item').click()
-
         //username
         cy.xpath("(//input[@class='oxd-input oxd-input--active'])[2]").type("new")
         //user role
@@ -55,6 +55,37 @@ describe('Admin',()=>{
         //click on save
         cy.get("button[type='submit']").click()
 
+
+    })
+
+    it('Delete an employee',()=>{
+
+        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+
+        //click on admin 
+        cy.get(':nth-child(1) > .oxd-main-menu-item').click()
+
+        //select the delete button 
+        cy.get(':nth-child(2) > .oxd-table-row > :nth-child(6) > .oxd-table-cell-actions > :nth-child(1) > .oxd-icon').click()
+        //click on yes, delete
+        cy.get('.oxd-button--label-danger').click()
+    })
+
+    it.only('Jobs',()=>{
+
+        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+
+        //click on admin 
+        cy.get(':nth-child(1) > .oxd-main-menu-item').click()
+
+        //click on Jobs
+        cy.get(':nth-child(2) > .oxd-topbar-body-nav-tab-item').click()
+        cy.wait(3000)
+        //select pay grade
+        cy.contains("Pay Grades").click()
+        cy.wait(3000)
+        //select grade 3
+        cy.get(':nth-child(3) > .oxd-table-row > :nth-child(1) > .oxd-table-card-cell-checkbox > .oxd-checkbox-wrapper > label').click()
 
     })
 })
