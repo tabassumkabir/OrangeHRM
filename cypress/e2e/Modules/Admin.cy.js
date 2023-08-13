@@ -27,7 +27,7 @@ describe('Admin',()=>{
         cy.get("input[placeholder='Type for hints...']").type("a")
         cy.wait(5000)
         //select employee
-        cy.contains("Hayat A").click()
+        cy.contains("Odis Adalwin").click()
         //status 
         cy.get('body > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > form:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)').click()
         //select status 
@@ -44,7 +44,7 @@ describe('Admin',()=>{
         cy.get("input[placeholder='Type for hints...']").type("a")
         cy.wait(5000)
         //select employee
-        cy.contains("Hayat A").click()
+        cy.contains("Odis Adalwin").click()
         cy.get("body > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > form:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)").click()
         //select status
         cy.contains("Enabled").click()
@@ -134,9 +134,10 @@ describe('Admin',()=>{
 
 })
 
-     it.only('Corporate branding',()=>{
+     it('Corporate branding',()=>{
 
      cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+     cy.wait(3000)
 
      //click on admin 
      cy.get(':nth-child(1) > .oxd-main-menu-item').click()
@@ -144,6 +145,8 @@ describe('Admin',()=>{
      cy.get('.oxd-topbar-body-nav > ul > :nth-child(5)').click()
      //click on corporate branding
      cy.contains("Corporate Branding").click()
+     //click on reset to deafult
+     cy.get('.orangehrm-actions-group > :nth-child(1)').click()
      //primary font color 
      cy.get(':nth-child(3) > .oxd-input-group > .orangehrm-color-input-wrapper > .oxd-color-input > .oxd-color-input-preview').click()
      //choose a color
@@ -151,11 +154,41 @@ describe('Admin',()=>{
      //put the hex code 
      cy.get('.oxd-color-picker > .oxd-input').clear().type("#800000").type('{enter}')
      //upload a pic
-     cy.xpath("(//div[@class='oxd-file-button'])[1]").attachFile("Random.png")
+     cy.xpath("(//input[@type='file'])[1]").selectFile('cypress/fixtures/Random.png',{force: true})
      cy.wait(5000)
      //click on publish 
-     //cy.get("button[type='submit']").click()
+    cy.get("button[type='submit']").click()
+    
+     
+
+
+     })
+
+     it('Email Configuration',()=>{
+
+     cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
      cy.wait(3000)
+
+     //click on admin 
+     cy.get(':nth-child(1) > .oxd-main-menu-item').click()
+     //click on more
+     cy.get('.oxd-topbar-body-nav > ul > :nth-child(5)').click()
+     //click on configuration
+     cy.xpath("(//a[@class='oxd-topbar-body-nav-tab-link --more'])[3]").click()
+     //click on  email configuration
+     cy.contains("Email Configuration").click()
+     cy.wait(3000)
+     //send as 
+     cy.xpath("(//input[@class='oxd-input oxd-input--active'])[2]").clear().type("123abc@gmail.com")
+     //sendmail
+     cy.get(':nth-child(3) > :nth-child(2) > .oxd-radio-wrapper > label').click()
+     //checkbox
+     cy.get('.oxd-switch-input').click()
+     //test email
+     cy.xpath("(//input[@class='oxd-input oxd-input--active'])[3]").type("123abc@gmail.com")
+     //click on save
+     cy.get("button[type='submit']").click()
+
 
 
      })
