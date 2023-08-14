@@ -68,7 +68,7 @@ describe('Admin',()=>{
         cy.get(':nth-child(1) > .oxd-main-menu-item').click()
 
         //select the delete button 
-        cy.get(':nth-child(2) > .oxd-table-row > :nth-child(6) > .oxd-table-cell-actions > :nth-child(1) > .oxd-icon').click()
+        cy.xpath("(//i[@class='oxd-icon bi-trash'])[1]").click({force:true})
         //click on yes, delete
         cy.get('.oxd-button--label-danger').click()
     })
